@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Proxy</title>
+</head>
+<body>
+  <h2>Simple Web Proxy</h2>
+  <form id="proxyForm">
+    <input type="text" id="url" placeholder="Enter URL (e.g. https://example.com)" size="50" />
+    <button type="submit">Go</button>
+  </form>
+  <pre id="output" style="white-space: pre-wrap;"></pre>
+
+  <script>
+    document.getElementById("proxyForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const url = document.getElementById("url").value;
+      const res = await fetch("/api/proxy?url=" + encodeURIComponent(url));
+      const text = await res.text();
+      document.getElementById("output").textContent = text;
+    });
+  </script>
+</body>
+</html>
